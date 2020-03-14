@@ -1,0 +1,15 @@
+admin_panel: control panel
+search: search...
+dashboard: dashboard
+admins: admins
+create_new: create new
+name: name
+email: email
+action: action
+password: password
+confirm_password: confirm password
+add_success: added successfully
+edit: edit
+edit_success: edited successfully
+delete_success: deleted successfully
+more: more

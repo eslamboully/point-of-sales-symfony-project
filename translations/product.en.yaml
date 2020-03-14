@@ -1,0 +1,15 @@
+ar:
+  title: arabic title
+  description: arabic description
+en:
+  title: english title
+  description: english description
+
+image: image
+purchase_price: purchase price
+sale_price: sale price
+store: store
+products: products
+title: title
+category: category
+increase: store

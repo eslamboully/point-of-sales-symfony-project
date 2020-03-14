@@ -1,0 +1,197 @@
+{% extends 'admin/include/base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">{{ 'orders'|trans([],'order') }}</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-left">
+            <li class="breadcrumb-item"><a href="{{ path('admin.index') }}">{{ 'dashboard'|trans([],'admin') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('admin.orders.index') }}">{{ 'orders'|trans([],'order') }}</a></li>
+            <li class="breadcrumb-item active">{{ 'create_new'|trans([],'admin') }}</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <!-- /.card-header -->
+
+                <div class="card-body">
+                  <div class="box box-primary">
+
+                      <div class="box-header">
+
+                          <h3 class="box-title" style="margin-bottom: 10px">{{ 'categories'|trans([],'category') }}</h3>
+
+                      </div><!-- end of box header -->
+
+                      <div class="box-body">
+
+                            {% for category in categories %}
+                                <div class="panel-group">
+
+                                  <div class="panel panel-info">
+
+                                      <div class="panel-heading">
+                                          <h4 class="panel-title">
+                                              <a data-toggle="collapse" href="#{{ category.translate(app.request.locale).name }}">{{ category.translate(app.request.locale).name }}</a>
+                                          </h4>
+                                      </div>
+                                      <div id="{{ category.translate(app.request.locale).name }}" class="panel-collapse collapse">
+                                          <div class="panel-body">
+                                                  <table class="table table-hover">
+                                                      <tbody>
+                                                        <tr>
+                                                          <th>الاسم</th>
+                                                          <th>المخزن</th>
+                                                          <th>السعر</th>
+                                                          <th>اضف</th>
+                                                      </tr>
+                                                  {% for product in category.products %}
+                                                      <tr>
+                                                          <td>{{ product.translate(app.request.locale).title }}</td>
+                                                          <td>{{ product.store }}</td>
+                                                          <td id="pp-{{ product.id }}">{{ product.saleprice }}</td>
+                                                          <td>
+                                                              <a href="###" id="product-{{ product.id }}" onclick="return getData(this)" data-id="{{ product.id }}" data-store="{{ product.store }}" data-price="{{ product.saleprice }}" data-title="{{ product.translate(app.request.locale).title }}" class="btn btn-success btn-sm add-product">
+                                                                  <i class="fa fa-plus"></i>
+                                                              </a>
+                                                          </td>
+                                                      </tr>
+                                                  {% endfor %}
+                                                  </tbody></table><!-- end of table -->
+
+
+                                          </div><!-- end of panel body -->
+
+                                      </div><!-- end of panel collapse -->
+                                  </div><!-- end of panel primary -->
+
+                              </div><!-- end of panel group -->
+                            {% endfor %}
+
+                      </div><!-- end of box body -->
+
+                  </div>
+                </div>
+
+            </div>
+            <!-- /.card -->
+
+        </div>
+        <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <!-- /.card-header -->
+
+                <div class="card-body">
+                  <div class="box box-primary">
+
+                      <div class="box-header">
+
+                          <h3 class="box-title">{{ 'orders'|trans([],'order') }}</h3>
+
+                      </div><!-- end of box header -->
+
+                      <div class="box-body">
+
+                          <form action="{{ path('admin.orders.store',{id:app.request.get('id')}) }}" method="post">
+
+                              <table class="table table-hover">
+                                  <thead>
+                                  <tr>
+                                      <th>المنتج</th>
+                                      <th>الكميه</th>
+                                      <th>السعر</th>
+                                  </tr>
+                                  </thead>
+
+                                  <tbody id="calculate-table" class="order-list">
+
+
+                                  </tbody>
+
+                              </table><!-- end of table -->
+
+                              <h4>المجموع : <span id="total-price">0</span></h4>
+
+                              <button type="submit" class="btn btn-primary btn-block" id="add-order-form-btn"><i class="fa fa-plus"></i> اضف طلب</button>
+
+                          </form>
+
+                      </div><!-- end of box body -->
+
+                  </div>
+                </div>
+
+            </div>
+            <!-- /.card -->
+
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+{% endblock %}
+
+
+{% block css %}
+<!-- DataTables -->
+<link rel="stylesheet" href="{{ asset('assets') }}/plugins/datatables/dataTables.bootstrap4.css">
+{% endblock %}
+
+{% block js %}
+<!-- DataTables -->
+<script src="{{ asset('assets/js/work.js') }}"></script>
+<script src="{{ asset('assets') }}/plugins/datatables/jquery.dataTables.js"></script>
+<script src="{{ asset('assets') }}/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <script>
+    $(function () {
+      $('#example2').DataTable({
+          "language": {
+              "paginate": {
+                  "next": "التالي",
+                  "previous" : "السابق"
+              },
+              "decimal":        "",
+              "emptyTable":     "لا توجد نتائج في هذا الجدول",
+              "info":           "اظهار _START_ الي _END_ من _TOTAL_ ادخال",
+              "infoEmpty":      "اظهار 0 من 0 الي 0 ادخال",
+              "infoFiltered":   "(تنقية من _MAX_ ادخال)",
+              "infoPostFix":    "",
+              "thousands":      ",",
+              "lengthMenu":     "اظهار _MENU_",
+              "loadingRecords": "تحميل...",
+              "processing":     "جاري المعالجة...",
+              "search":         "بحث:",
+              "zeroRecords":    "لا يوجد نتائج",
+          },
+        "info" : true,
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "autoWidth": true
+      });
+    });
+    </script>
+
+
+{% endblock %}

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{% block title %} {% endblock %}</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome 1-->
+  <link rel="stylesheet" href="{{ asset('assets') }}/plugins/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons 1-->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style 1-->
+  <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/adminlte.min.css">
+  <!-- iCheck 1-->
+  <link rel="stylesheet" href="{{ asset('assets') }}/plugins/iCheck/flat/blue.css">
+  <!-- Daterange picker 1 -->
+  <link rel="stylesheet" href="{{ asset('assets') }}/plugins/daterangepicker/daterangepicker-bs3.css">
+
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  {% if(app.request.locale == 'ar') %}
+  <!-- Morris chart -->
+      <link rel="stylesheet" href="{{ asset('assets') }}/plugins/morris/morris.css">
+      <!-- jvectormap -->
+      <link rel="stylesheet" href="{{ asset('assets') }}/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+      <!-- bootstrap wysihtml5 - text editor -->
+      <link rel="stylesheet" href="{{ asset('assets') }}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+      <!-- Date Picker -->
+      <link rel="stylesheet" href="{{ asset('assets') }}/plugins/datepicker/datepicker3.css">
+      <!-- bootstrap rtl -->
+      <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/bootstrap-rtl.min.css">
+      <!-- template rtl version -->
+      <link rel="stylesheet" href="{{ asset('assets') }}/dist/css/custom-style.css">
+
+      <link href="https://fonts.googleapis.com/css?family=Cairo:400,700" rel="stylesheet">
+      <style>
+            body, h1, h2, h3, h4, h5, h6 {
+                font-family: 'Cairo', sans-serif !important;
+            }
+      </style>
+  {% elseif(app.request.locale == 'en') %}
+
+      <!-- Tempusdominus Bbootstrap 4 -->
+      <link rel="stylesheet" href="{{ asset('assets') }}/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+      <!-- JQVMap -->
+      <link rel="stylesheet" href="{{ asset('assets') }}/plugins/jqvmap/jqvmap.min.css">
+      <!-- summernote -->
+      <link rel="stylesheet" href="{{ asset('assets') }}/plugins/summernote/summernote-bs4.css">
+      <!-- overlayScrollbars -->
+      <link rel="stylesheet" href="{{ asset('assets') }}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+
+  {% endif %}
+
+  <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{ path('admin.logout') }}" class="nav-link"><i class="fa fa-sign-out"></i></a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <!-- Messages Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="fa fa-globe"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
+          <a href="{{ path('admin.index.ar') }}" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                    العربية
+                </h3>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="{{ path('admin.index.en') }}" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  english
+                </h3>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+        </div>
+      </li>
+    </ul>
+
+    <!-- SEARCH FORM -->
+    <form class="form-inline ml-3">
+      <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" type="search" placeholder="{{ 'search'|trans([],'admin') }}" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Right navbar links -->
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{{ path('admin.index') }}" class="brand-link">
+      <img src="{{ asset('assets') }}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">{{ 'admin_panel'|trans([],'admin') }}</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar" style="direction: {{ app.request.locale == 'ar' ? 'ltr' : 'rtl' }}">
+      <div style="direction: {{ app.request.locale == 'ar' ? 'rtl' : 'ltr' }}">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="https://secure.gravatar.com/avatar/5ffa2a1ffeb767c60ab7e1052e385d5c?s=52&d=mm&r=g" class="img-circle elevation-2" alt="User Image">
+          </div>
+          <div class="info">
+            <a href="#" class="d-block">{{ app.user.name }}</a>
+          </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+            <li class="nav-item">
+              <a href="{{ path('admin.index') }}" class="nav-link">
+                <i class="nav-icon fa fa-th"></i>
+                <p>
+                  {{ 'dashboard'|trans([],'admin') }}
+                </p>
+              </a>
+            </li>
+            <li class="nav-item has-treeview ">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fa fa-shopping-cart"></i>
+                <p>
+                  {{ 'categories'|trans([],'category') }}
+                  <i class="right fa fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ path('admin.categories.index') }}" class="nav-link">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>{{ 'categories'|trans([],'category') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ path('admin.categories.create') }}" class="nav-link">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>{{ 'create_new'|trans([],'admin') }}</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item has-treeview ">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fa fa-shopping-basket"></i>
+                <p>
+                  {{ 'products'|trans([],'product') }}
+                  <i class="right fa fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ path('admin.products.index') }}" class="nav-link">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>{{ 'products'|trans([],'product') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ path('admin.products.create') }}" class="nav-link">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>{{ 'create_new'|trans([],'admin') }}</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item has-treeview ">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fa fa-user-o"></i>
+                <p>
+                  {{ 'clients'|trans([],'client') }}
+                  <i class="right fa fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ path('admin.clients.index') }}" class="nav-link">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>{{ 'clients'|trans([],'client') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ path('admin.clients.create') }}" class="nav-link">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>{{ 'create_new'|trans([],'admin') }}</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item ">
+              <a href="{{ path('admin.orders.index') }}" class="nav-link">
+                <i class="nav-icon fa fa-reorder"></i>
+                <p>
+                  {{ 'orders'|trans([],'order') }}
+                </p>
+              </a>
+            </li>
+            <li class="nav-item has-treeview ">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fa fa-user-secret"></i>
+                <p>
+                  {{ 'admins'|trans([],'admin') }}
+                  <i class="right fa fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ path('admin.admins.index') }}" class="nav-link">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>{{ 'admins'|trans([],'admin') }}</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ path('admin.admins.create') }}" class="nav-link">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>{{ 'create_new'|trans([],'admin') }}</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  {% block body %} {% endblock %}
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>CopyLeft &copy; 2020 <a href="http://abdelrahman-osama.epizy.com/">abdelraman osama</a>.</strong>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="{{ asset('assets') }}/plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('assets') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Morris.js charts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="{{ asset('assets') }}/plugins/morris/morris.min.js"></script>
+<!-- Sparkline -->
+<script src="{{ asset('assets') }}/plugins/sparkline/jquery.sparkline.min.js"></script>
+<!-- jvectormap -->
+<script src="{{ asset('assets') }}/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="{{ asset('assets') }}/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="{{ asset('assets') }}/plugins/knob/jquery.knob.js"></script>
+<!-- daterangepicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+<script src="{{ asset('assets') }}/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- datepicker -->
+<script src="{{ asset('assets') }}/plugins/datepicker/bootstrap-datepicker.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="{{ asset('assets') }}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- Slimscroll -->
+<script src="{{ asset('assets') }}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="{{ asset('assets') }}/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('assets') }}/dist/js/adminlte.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{{ asset('assets') }}/dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{ asset('assets') }}/dist/js/demo.js"></script>
+
+{% block js %} {% endblock %}
+</body>
+</html>

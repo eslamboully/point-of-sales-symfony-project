@@ -1,0 +1,15 @@
+admin_panel: لوحة التحكم
+search: بحث...
+dashboard: الرئيسية
+admins: المشرفين
+create_new: اضف جديد
+name: الاسم
+email: البريد الالكتروني
+action: اكشن
+password: كلمة المرور
+confirm_password: تأكيد كلمة المرور
+add_success: تمت الاضافة بنجاح
+edit: تعديل
+edit_success: تم التعديل بنجاح
+delete_success: تم الحذف بنجاح
+more: عرض

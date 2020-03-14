@@ -1,0 +1,15 @@
+ar:
+  title: العنوان باللغة العربية
+  description: الوصف باللغة العربية
+en:
+  title: العنوان باللغة الانجليزية
+  description: الوصف باللغة الانجليزية
+
+image: صورة
+purchase_price: سعر الشراء
+sale_price: سعر البيع
+store: المخزن
+products: المنتجات
+title: العنوان
+category: القسم
+increase: المكسب

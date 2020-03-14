@@ -1,0 +1,103 @@
+{% extends 'admin/include/base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">{{ 'dashboard'|trans([],'admin') }}</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-left">
+            <li class="breadcrumb-item active">{{ 'dashboard'|trans([],'admin') }}</li>
+            <!-- <li class="breadcrumb-item"><a href="#">ssss</a></li> -->
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+
+
+              <div class="col-lg-3 col-xs-6">
+                  <div class="small-box" style="background-color:#00aca4;color:white">
+                      <div class="inner">
+                          <h3>{{ categories }}</h3>
+
+                          <p>{{ 'categories'|trans([],'category') }}</p>
+                      </div>
+                      <div class="icon">
+                          <i class="fa fa-shopping-cart"></i>
+                      </div>
+                      <a href="{{ path('admin.categories.index') }}" class="small-box-footer">{{ 'more'|trans([],'admin') }} <i class="fa fa-arrow-circle-right"></i></a>
+                  </div>
+              </div>
+
+
+              <div class="col-lg-3 col-xs-6">
+                  <div class="small-box" style="background-color:#409228;color:white">
+                      <div class="inner">
+                          <h3>{{ products }}</h3>
+
+                          <p>{{ 'products'|trans([],'product') }}</p>
+                      </div>
+                      <div class="icon">
+                          <i class="fa fa-shopping-bag"></i>
+                      </div>
+                      <a href="{{ path('admin.products.index') }}" class="small-box-footer">{{ 'more'|trans([],'admin') }} <i class="fa fa-arrow-circle-right"></i></a>
+                  </div>
+              </div>
+
+
+              <div class="col-lg-3 col-xs-6">
+                  <div class="small-box" style="background-color:#a5251d;color:white">
+                      <div class="inner">
+                          <h3>{{ clients }}</h3>
+
+                          <p>{{ 'clients'|trans([],'client') }}</p>
+                      </div>
+                      <div class="icon">
+                          <i class="fa fa-user-o"></i>
+                      </div>
+                      <a href="{{ path('admin.clients.index') }}" class="small-box-footer">{{ 'more'|trans([],'admin') }} <i class="fa fa-arrow-circle-right"></i></a>
+                  </div>
+              </div>
+
+
+              <div class="col-lg-3 col-xs-6">
+                  <div class="small-box" style="background-color:#a5a11d;color:white">
+                      <div class="inner">
+                          <h3>{{ admins }}</h3>
+
+                          <p>{{ 'admins'|trans([],'admin') }}</p>
+                      </div>
+                      <div class="icon">
+                          <i class="fa fa-user-secret"></i>
+                      </div>
+                      <a href="{{ path('admin.admins.index') }}" class="small-box-footer">{{ 'more'|trans([],'admin') }} <i class="fa fa-arrow-circle-right"></i></a>
+                  </div>
+              </div>
+
+          </div>
+          <div class="box box-solid">
+
+                <div class="box-header">
+                    <h3 class="box-title">Sales Graph</h3>
+                </div>
+                <div class="box-body border-radius-none">
+                    <div class="chart" id="line-chart" style="height: 250px;"></div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+  </section>
+  <!-- /.content -->
+</div>
+{% endblock %}
